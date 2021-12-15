@@ -30,8 +30,8 @@ count_class_type(dataset, 'sentimentLabel')
 X_train, y_train, X_test, y_test = split_data(dataset, split_ratio=SPLIT_RATIO)
 
 model = NB()
-model.fit(X_train, y_train)
-classification = model.predict(X_test)
+model.fit(X_train, y_train, verbose=1)
+classification = model.predict(X_test, verbose=1)
 
 conf_matrix = confusion_matrix(y_test, classification)
 print("\nConfusion Matrix : \n", conf_matrix, "\n")
@@ -43,4 +43,3 @@ print("Precision = ", precision(conf_matrix))
 from sklearn.model_selection import cross_val_score
 scores = cross_val_score(model, X_train, y_train, cv=5)
 print(scores)
-

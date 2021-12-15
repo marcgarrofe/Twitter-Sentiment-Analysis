@@ -6,6 +6,7 @@ import time
 class NB:
     def __init__(self, alpha=1.0):
         self.alpha = alpha
+        self.vocabulary = dict()
 
     def get_params(self, deep=False):
         return {
@@ -25,7 +26,7 @@ class NB:
         :param verbose: If higher than 0, prints more info
         """
         start = time.time()
-        self.vocabulary = learn_naive_bayes_text(x, y)
+        self.vocabulary = learn_naive_bayes_text(x, y, self.alpha)
         end = time.time()
         if verbose == 1:
             print("::-> fit() Time = ", end - start)

@@ -22,15 +22,16 @@ def count_words(x_train: np.ndarray, y_train: np.ndarray):
     return vocabulary
 
 
-def laplace_smoothing(vocabulary: dict, zero_prob: int, one_prob: int):
+def laplace_smoothing(vocabulary: dict, zero_prob: int, one_prob: int, alpha=1):
     """
     Calculates the probabilities of each word applying Laplace Smoothing
     :param vocabulary: Dictionary to be modified containing the counter classification for each word
     :param zero_prob: Total probability of 0
     :param one_prob: Total probability of 1
+    :param alpha: Additive (Laplace) smoothing parameter (0 for no smoothing)
     :return: Dictionary with the probabilities of each word
     """
-    laplace_l = 1
+    laplace_l = alpha
     laplace_r = 2  # Al ser binary = 2
 
     for word in vocabulary:
@@ -40,16 +41,17 @@ def laplace_smoothing(vocabulary: dict, zero_prob: int, one_prob: int):
     return vocabulary
 
 
-def learn_naive_bayes_text(x_train: np.ndarray, y_train: np.ndarray):
+def learn_naive_bayes_text(x_train: np.ndarray, y_train: np.ndarray, alpha=1):
     """
     Generates the probabilities dictionary of the model
     :param x_train: Input training data
     :param y_train: Output training data
+    :param alpha: Additive (Laplace) smoothing parameter (0 for no smoothing)
     :return: Final dictionary of the model
     """
     vocabulary = count_words(x_train, y_train)
     train_size = x_train.size
-    return laplace_smoothing(vocabulary, train_size/2, train_size/2)
+    return laplace_smoothing(vocabulary, train_size/2, train_size/2, alpha)
 
 
 def classify_naive_bayes_text(vocabulary, x_test: np.ndarray):
@@ -59,7 +61,7 @@ def classify_naive_bayes_text(vocabulary, x_test: np.ndarray):
     :param x_test: Input data to be classified
     :return: List with the classification. Example : list([0, 0, 1, 0, 0])
     """
-    classfication = list()
+    classification = list()
 
     for row in x_test:
         zero_prob = 0.0
@@ -72,8 +74,8 @@ def classify_naive_bayes_text(vocabulary, x_test: np.ndarray):
                 one_prob += np.log(vocabulary[word][1])
 
         if zero_prob >= one_prob:
-            classfication.append(0)
+            classification.append(0)
         else:
-            classfication.append(1)
+            classification.append(1)
 
-    return np.asarray(classfication, dtype=int)
+    return np.asarray(classification, dtype=int)

@@ -19,6 +19,7 @@ Classificar amb Naïve Bayes els missatges analitzant les probabilitats de les p
 | -- | -- | -- | -- | -- | -- | -- | -- | -- |
 | Naive Bayes default | 9.22 s | 7.63 s | 1.564.280 | 0.2 | 1 | 0.7515 | 0.6017 | 0.8575 |
 | Naive Bayes default | 9.22 s | 7.63 s | 1.564.280 | 0.2 | 2 | 0.7501 | 0.5940 | 0.8641 |
+| Naive Bayes Preprocessing | 8.23 s | 6.79 s | 1.564.280 | 0.2 | 2 | 0.7583 | 0.6317 | 0.8457 |
 
 
 
