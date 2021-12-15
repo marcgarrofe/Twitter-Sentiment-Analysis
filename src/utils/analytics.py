@@ -20,7 +20,7 @@ def count_class_type(dataset: pd.DataFrame, column_label: str):
         elif value == 1:
             one_count += 1
 
-    print('Class Counter :')
+    print('\nClass Counter :')
     print('  0 appeared ', zero_count, ' times')
     print('  1 appeared ', one_count, ' times\n')
 

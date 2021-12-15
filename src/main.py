@@ -1,20 +1,21 @@
-from utils.import_data import load_dataset, preprocessing
+from utils.import_data import load_dataset
+from utils.preprocessing import preprocessing
 from utils.analytics import confusion_matrix, accuracy, recall, precision, count_class_type
 from utils.split_data import split_data
 from models.naive_bayes import NB
 
 # Small or Large
-DATASET_SMALL = False
+DATASET_SMALL = True
 # If -1, no reduction applied
 DATASET_SIZE = -1
 SPLIT_RATIO = 0.2
 
 
 if DATASET_SMALL:
-    print("::-> Testing with Small DataSet\n")
+    print("::-> Testing with Small DataSet")
     DATA_PATH = '../data/FinalStemmedSentimentAnalysisDatasetSmall.csv'
 else:
-    print("::-> Testing with Large DataSet\n")
+    print("::-> Testing with Large DataSet")
     DATA_PATH = '../data/FinalStemmedSentimentAnalysisDataset.csv'
 
 
@@ -38,8 +39,8 @@ print("Accuracy  = ", accuracy(conf_matrix))
 print("Recall    = ", recall(conf_matrix))
 print("Precision = ", precision(conf_matrix))
 
-"""
+
 from sklearn.model_selection import cross_val_score
 scores = cross_val_score(model, X_train, y_train, cv=5)
 print(scores)
-"""
+

@@ -1,50 +1,48 @@
 import numpy as np
-from algorithms.naive_bayes_algorithms import learn_naive_bayes_text, classify_naive_bayes_text
+from src.algorithms.naive_bayes_algorithms import learn_naive_bayes_text, classify_naive_bayes_text
 import time
-import sklearn
 
 
 class NB:
-    """
-    def __init__(self):
-        self.vocabulary = dict()
+    def __init__(self, alpha=1.0):
+        self.alpha = alpha
 
     def get_params(self, deep=False):
         return {
-            'vocabulary': self.vocabulary,
+            'alpha': self.alpha
         }
-    """
-
-    def get_params(self, deep=False):
-        return {}
 
     def set_params(self, **parameters):
         for parameter, value in parameters.items():
             setattr(self, parameter, value)
         return self
 
-    def fit(self, x: np.ndarray, y: np.ndarray):
+    def fit(self, x: np.ndarray, y: np.ndarray, verbose=0):
         """
-        Trains the Naïve Bayes fucntion
+        Trains the Naïve Bayes function
         :param x: Input training data
         :param y: Output training data
+        :param verbose: If higher than 0, prints more info
         """
         start = time.time()
         self.vocabulary = learn_naive_bayes_text(x, y)
         end = time.time()
-        print("::-> fit() Time = ", end - start)
+        if verbose == 1:
+            print("::-> fit() Time = ", end - start)
 
-    def predict(self, x: np.ndarray):
+    def predict(self, x: np.ndarray, verbose=0):
         """
-        Given an input data, predicts the classfication
+        Given an input data, predicts the classification
         :param x: Input testing data
-        :return: list() of the classfication
+        :return: list() of the classification
+        :param verbose: If higher than 0, prints more info
         """
         start = time.time()
-        classfication = classify_naive_bayes_text(self.vocabulary, x)
+        classification = classify_naive_bayes_text(self.vocabulary, x)
         end = time.time()
-        print("::-> fit() Time = ", end - start)
-        return classfication
+        if verbose == 1:
+            print("::-> predict() Time = ", end - start)
+        return classification
 
     def score(self, x, y_true):
         """
@@ -59,5 +57,3 @@ class NB:
             if true == pred:
                 good_classification += 1
         return good_classification / y_true.size
-
-

@@ -71,7 +71,7 @@ def classify_naive_bayes_text(vocabulary, x_test: np.ndarray):
                 zero_prob += np.log(vocabulary[word][0])
                 one_prob += np.log(vocabulary[word][1])
 
-        if zero_prob > one_prob:
+        if zero_prob >= one_prob:
             classfication.append(0)
         else:
             classfication.append(1)
