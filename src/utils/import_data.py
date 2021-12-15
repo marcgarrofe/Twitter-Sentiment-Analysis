@@ -15,9 +15,18 @@ def load_dataset(path: str):
         return dataset
 
 
-def preprocessing(dataset, delate_nan=True, shufle=True):
+def preprocessing(dataset: pd.DataFrame, delate_nan=True, shuffle=True):
+    """
+    Given a dataset, process the columns by transforming the raw data to be more suitable for the estimators.
+    :param dataset: DataFrame data object
+    :param delate_nan: Boolean indicates if NaN is removed from the dataset
+    :param shuffle: Boolean indicates if shuffle the data
+    :return: Processed dataset
+    """
+    assert not dataset.empty, 'preprocessing() : DataFrame empty'
+
     if delate_nan:
        dataset = dataset.dropna()
-    if shufle:
+    if shuffle:
         dataset = dataset.sample(frac=1).reset_index(drop=True)
     return dataset

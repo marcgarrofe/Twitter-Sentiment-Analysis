@@ -1,5 +1,5 @@
 import numpy as np
-from src.algorithms.naive_bayes_algorithms import learn_naive_bayes_text, classify_naive_bayes_text
+from algorithms.naive_bayes_algorithms import learn_naive_bayes_text, classify_naive_bayes_text
 import time
 import sklearn
 
