@@ -4,3 +4,4 @@
 *.iml
 *.pyc
 */__pycache__
+data/FinalStemmedSentimentAnalysisDataset.csv
