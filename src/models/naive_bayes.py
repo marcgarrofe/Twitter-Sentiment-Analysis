@@ -1,5 +1,5 @@
 import numpy as np
-from src.algorithms.naive_bayes_algorithms import learn_naive_bayes_text, classify_naive_bayes_text
+from src.algorithms.naive_bayes_algorithms import learn_naive_bayes_text, classify_naive_bayes_text, count_class
 import time
 
 
@@ -7,6 +7,9 @@ class NB:
     def __init__(self, alpha=1.0):
         self.alpha = alpha
         self.vocabulary = dict()
+        self.total_zero_prob = 0.0
+        self.total_one_prob = 0.0
+        self.minimum_appearances = -1
 
     def get_params(self, deep=False):
         return {
@@ -20,12 +23,15 @@ class NB:
 
     def fit(self, x: np.ndarray, y: np.ndarray, verbose=0):
         """
-        Trains the Naïve Bayes function
+        Trains the Naive Bayes function
         :param x: Input training data
         :param y: Output training data
         :param verbose: If higher than 0, prints more info
         """
         start = time.time()
+        self.total_zero_prob, self.total_one_prob = count_class(y)
+        self.total_zero_prob = self.total_zero_prob / y.size
+        self.total_one_prob = self.total_one_prob / y.size
         self.vocabulary = learn_naive_bayes_text(x, y, self.alpha)
         end = time.time()
         if verbose == 1:
@@ -39,7 +45,7 @@ class NB:
         :param verbose: If higher than 0, prints more info
         """
         start = time.time()
-        classification = classify_naive_bayes_text(self.vocabulary, x)
+        classification = classify_naive_bayes_text(self.vocabulary, x, self.total_zero_prob, self.total_one_prob)
         end = time.time()
         if verbose == 1:
             print("::-> predict() Time = ", end - start)

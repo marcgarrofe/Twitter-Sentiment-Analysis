@@ -4,12 +4,13 @@ import re
 import string
 
 
-def preprocessing(dataset: pd.DataFrame, delate_nan=True, shuffle=True):
+def preprocessing(dataset: pd.DataFrame, delate_nan=True, shuffle=True, clean_text=True):
     """
     Given a dataset, process the columns by transforming the raw data to be more suitable for the estimators.
     :param dataset: DataFrame data object
     :param delate_nan: Boolean indicates if NaN is removed from the dataset
     :param shuffle: Boolean indicates if shuffle the data
+    :param clean_text: Boolean indicates if text is processed
     :return: Processed dataset
     """
     assert not dataset.empty, 'preprocessing() : DataFrame empty'
@@ -20,7 +21,8 @@ def preprocessing(dataset: pd.DataFrame, delate_nan=True, shuffle=True):
         dataset = dataset.dropna()
     if shuffle:
         dataset = dataset.sample(frac=1).reset_index(drop=True)
-    dataset = process_tweets(dataset)
+    if clean_text:
+        dataset = process_tweets(dataset)
 
     end = time.time()
     print("::-> preprocessing() Time = ", end - start)

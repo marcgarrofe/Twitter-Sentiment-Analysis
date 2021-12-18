@@ -15,7 +15,7 @@ Id del missatge | Contingut del missatge | Data del missatge | Classificació de
 Classificar amb Naïve Bayes els missatges analitzant les probabilitats de les paraules que formen els missatges.
 
 ## Experiments
-| Model | Temps fit() | Temps predict() | Dades Dataset | Split Ratio | laplace_l | Accuracy | Precision | Recall |
+| Model | Temps fit() | Temps predict() | Dades Dataset | Split Ratio | laplace alpha | Accuracy | Precision | Recall |
 | -- | -- | -- | -- | -- | -- | -- | -- | -- |
 | Naive Bayes default | 9.22 s | 7.63 s | 1.564.280 | 0.2 | 1 | 0.7515 | 0.6017 | 0.8575 |
 | Naive Bayes default | 9.22 s | 7.63 s | 1.564.280 | 0.2 | 2 | 0.7501 | 0.5940 | 0.8641 |
