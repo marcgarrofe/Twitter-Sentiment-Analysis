@@ -21,10 +21,18 @@ dataset = preprocessing(dataset, delate_nan=True, shuffle=True)
 
 X_train, y_train, X_test, y_test = split_data(dataset, split_ratio=SPLIT_RATIO)
 
+"""
 grid_param = {
-    'alpha': [0.1, 0.25, 0.75, 0.5, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 3]}
+    'alpha': [0.01, 0.1, 0.25, 0.75, 0.5, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 3]}
+"""
+"""
+grid_param = {
+    'alpha': [1.1, 1.15, 1.2, 1.30, 1.35, 1.4, 1.45, 1.55, 1.6, 1.65, 1.7]}
+"""
 
-
+grid_param = {
+    'alpha': [1.1, 1.15, 1.2, 1.30, 1.35, 1.4, 1.45, 1.55, 1.6, 1.65, 1.7]
+}
 nb_grid = GridSearchCV(NB(), param_grid=grid_param, n_jobs=-1, cv=5, verbose=2)
 nb_grid.fit(X_train, y_train)
 

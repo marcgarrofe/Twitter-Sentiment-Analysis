@@ -1,5 +1,5 @@
 import pandas as pd
-from src.utils.preprocessing import process_tweets
+import os
 
 
 def load_dataset(path: str):
@@ -8,9 +8,10 @@ def load_dataset(path: str):
     :param path: String amb la ruta al fitxer
     :return: DataFrame amb les dades
     """
+    assert os.path.isfile(path), "load_dataset() File doesn't exist"
     try:
         dataset = pd.read_csv(path, sep=';')
     except:
-        print("::-> ERROR : llegeix_taulell_doc()...")
+        print("ERROR : llegeix_taulell_doc()...")
     else:
         return dataset

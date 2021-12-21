@@ -35,12 +35,17 @@ def laplace_smoothing(vocabulary: dict, zero_prob: int, one_prob: int, alpha=1, 
     laplace_l = alpha
     laplace_r = 2  # Al ser binary = 2
 
+    list_keys_to_drop = list()
+
     for word in vocabulary:
         if minimum_appearances == -1 or vocabulary[word][0] + vocabulary[word][1] >= minimum_appearances:
             vocabulary[word][0] = (vocabulary[word][0] + laplace_l) / (zero_prob + laplace_l * laplace_r)
             vocabulary[word][1] = (vocabulary[word][1] + laplace_l) / (one_prob + laplace_l * laplace_r)
         else:
-            del vocabulary[word]
+            list_keys_to_drop.append(word)
+
+    for key in list_keys_to_drop:
+        del vocabulary[key]
 
     return vocabulary
 

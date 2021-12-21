@@ -1,7 +1,6 @@
 import time
 import pandas as pd
 import re
-import string
 
 
 def preprocessing(dataset: pd.DataFrame, delate_nan=True, shuffle=True, clean_text=True):
@@ -19,9 +18,12 @@ def preprocessing(dataset: pd.DataFrame, delate_nan=True, shuffle=True, clean_te
 
     if delate_nan:
         dataset = dataset.dropna()
+        print("::-> preprocessing() Delate Null values completed")
     if shuffle:
         dataset = dataset.sample(frac=1).reset_index(drop=True)
+        print("::-> preprocessing() Shuffle rows completed")
     if clean_text:
+        print("::-> preprocessing() Clean the text might take a while (30 seconds aprox)")
         dataset = process_tweets(dataset)
 
     end = time.time()
@@ -30,9 +32,6 @@ def preprocessing(dataset: pd.DataFrame, delate_nan=True, shuffle=True, clean_te
 
 
 def process_tweets(dataset: pd.DataFrame):
-    url_pattern = r"((http://)[^ ]*|(https://)[^ ]*|( www\.)[^ ]*)"
-    user_pattern = '@[^\s]+'
-
     modification_counter = 0
 
     tweet_column = dataset['tweetText'].values
@@ -62,7 +61,6 @@ def process_tweets(dataset: pd.DataFrame):
             if word in abbreviations.keys():
                 modification_counter += 1
                 tweet_column[index] = tweet.replace(word, abbreviations[word])
-                # tweet = tweet.replace(word, abbreviations[word])
 
     dataset['tweetText'] = tweet_column
 

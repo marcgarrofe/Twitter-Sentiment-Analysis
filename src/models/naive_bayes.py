@@ -32,7 +32,7 @@ class NB:
         self.total_zero_prob, self.total_one_prob = count_class(y)
         self.total_zero_prob = self.total_zero_prob / y.size
         self.total_one_prob = self.total_one_prob / y.size
-        self.vocabulary = learn_naive_bayes_text(x, y, self.alpha)
+        self.vocabulary = learn_naive_bayes_text(x, y, self.alpha, minimum_appearances=self.minimum_appearances)
         end = time.time()
         if verbose == 1:
             print("::-> fit() Time = ", end - start)
